@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     # my apps
     'map.apps.MapConfig',
     'board.apps.BoardConfig',
+    # rest_framework
+    'rest_framework',
+    # swagger
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
