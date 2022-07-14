@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'board.apps.BoardConfig',
     # rest_framework
     'rest_framework',
+    # swagger
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
