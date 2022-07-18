@@ -5,6 +5,7 @@ RUN mkdir /app
 WORKDIR /app
 
 COPY requirements.txt ./
+ENV DJANGO_SETTINGS_MODULE=config.settings.local
 RUN pip install --upgrade pip && pip install -r requirements.txt
 COPY . .
 
