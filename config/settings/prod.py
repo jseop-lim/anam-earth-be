@@ -16,10 +16,10 @@ SECRET_KEY = env('SECRET_KEY')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': env('DATABASES_NAME'),
-        'USER': env('DATABASES_USER'),
-        'PASSWORD': env('DATABASES_PASSWORD'),
-        'HOST': 'host.docker.internal',
+        'NAME': env('MYSQL_DATABASE'),
+        'USER': env('MYSQL_USER'),
+        'PASSWORD': env('MYSQL_PASSWORD'),
+        'HOST': 'db',
         'PORT': 3306,
     }
 }
