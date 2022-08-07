@@ -10,7 +10,7 @@ class CommentListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ['id', 'post', 'user', 'content']
+        fields = ['id', 'post', 'content']  # TODO user
 
 
 class CommentUpdateSerializer(serializers.ModelSerializer):
@@ -21,8 +21,8 @@ class CommentUpdateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ['id', 'post', 'user', 'content']
-        read_only_fields = ['user']
+        fields = ['id', 'post', 'content']  # TODO user
+        # read_only_fields = ['user']  # TODO user
 
 
 class PostListSerializer(serializers.ModelSerializer):
@@ -31,7 +31,7 @@ class PostListSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Post
-        fields = ['id', 'user', 'subject', 'created_at']
+        fields = ['id', 'subject', 'created_at']  # TODO user
 
 
 class PostDetailSerializer(serializers.ModelSerializer):
@@ -42,5 +42,5 @@ class PostDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['id', 'user', 'subject', 'content', 'created_at', 'comments']
-        read_only_fields = ['user']
+        fields = ['id', 'subject', 'content', 'created_at', 'comments']  # TODO user
+        # read_only_fields = ['user']  # TODO user
