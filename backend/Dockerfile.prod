@@ -1,0 +1,12 @@
+FROM python:3.9
+ENV PYTHONUNBUFFERED=1
+
+RUN mkdir /app
+WORKDIR /app
+
+COPY requirements.txt ./
+ENV DJANGO_SETTINGS_MODULE=config.settings.prod
+RUN pip install --upgrade pip && pip install -r requirements.txt && pip install gunicorn
+COPY . .
+
+CMD ["gunicorn", "--bind", "0:8000", "config.wsgi:application"]
