@@ -18,6 +18,6 @@ fi
 docker compose up -d
 docker image prune -f
 # Migrate Database
-docker exec -it anam-earth-backend bash -c "python manage.py migrate --settings=config.settings.prod"
+docker exec anam-earth-backend bash -c "python manage.py migrate --settings=config.settings.prod"
 # Reload Nginx in docker container
-docker exec -it nginx bash -c "nginx -s reload"
+docker exec nginx bash -c "nginx -s reload"
