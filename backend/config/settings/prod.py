@@ -4,7 +4,12 @@ import environ
 
 
 DEBUG = False
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'anam-earth.jseoplim.com',
+    'www.anam-earth.jseoplim.com',
+    '43.200.76.8',
+    '127.0.0.1'
+]
 
 USE_X_FORWARDED_HOST = True
 FORCE_SCRIPT_NAME = '/api'
@@ -23,7 +28,7 @@ DATABASES = {
         'NAME': env('MYSQL_DATABASE'),
         'USER': env('MYSQL_USER'),
         'PASSWORD': env('MYSQL_PASSWORD'),
-        'HOST': 'db',
+        'HOST': '127.0.0.1',
         'PORT': 3306,
     }
 }
