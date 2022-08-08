@@ -11,6 +11,9 @@ ALLOWED_HOSTS = [
     '127.0.0.1'
 ]
 
+STATIC_ROOT = BASE_DIR / 'static/'
+STATICFILES_DIRS = []
+
 # USE_X_FORWARDED_HOST = True
 # FORCE_SCRIPT_NAME = '/api'
 #
@@ -37,14 +40,25 @@ DATABASES = {
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    "filters": {
+        "require_debug_false": {
+            "()": "django.utils.log.RequireDebugFalse",
+        },
+    },
     'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
+        "console_prod": {
+            "level": "DEBUG",
+            "filters": ["require_debug_false"],
+            "class": "logging.StreamHandler",
         },
     },
     'loggers': {
+        "django": {
+            "handlers": ["console_prod"],
+            "level": "DEBUG",
+        },
         'django.request': {
-            'handlers': ['console'],
+            'handlers': ['console_prod'],
             'level': 'DEBUG',  # change debug level as appropiate
             'propagate': False,
         },
