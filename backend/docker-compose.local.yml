@@ -20,12 +20,12 @@ services:
       timeout: 10s
       retries: 10
 
-  app:
-    image: anam-earth-app:latest
+  backend:
+    image: anam-earth-backend:latest
     build:
       context: .
       dockerfile: Dockerfile.local
-    container_name: anam-earth-app
+    container_name: anam-earth-backend
     command: python manage.py runserver 0.0.0.0:8000
     ports:
       - "8000:8000"
