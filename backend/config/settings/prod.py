@@ -5,8 +5,7 @@ import environ
 
 DEBUG = False
 ALLOWED_HOSTS = [
-    'anam-earth.jseoplim.com',
-    'www.anam-earth.jseoplim.com',
+    'anam-earth-api.jseoplim.com',
     '43.200.76.8',
     'ec2-43-200-76-8.ap-northeast-2.compute.amazonaws.com',
     '127.0.0.1'
