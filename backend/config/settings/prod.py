@@ -14,7 +14,7 @@ ALLOWED_HOSTS = [
 USE_X_FORWARDED_HOST = True
 FORCE_SCRIPT_NAME = '/api'
 
-STATIC_URL = FORCE_SCRIPT_NAME + STATIC_URL
+STATIC_URL = 'api/static/'
 
 
 env = environ.Env()
@@ -31,4 +31,22 @@ DATABASES = {
         'HOST': '43.200.76.8',
         'PORT': 3306,
     }
+}
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'DEBUG',  # change debug level as appropiate
+            'propagate': False,
+        },
+    },
 }
