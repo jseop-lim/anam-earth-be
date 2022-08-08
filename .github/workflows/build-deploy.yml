@@ -26,13 +26,6 @@ jobs:
         env:
           file_path: backend/.env.prod
       -
-        name: Create config.sh for Deployment
-        run: |
-          echo "DOCKER_HUB_USERNAME=${{ secrets.DOCKER_HUB_USERNAME }}" >> $file_path
-          echo "DOCKER_HUB_ACCESS_TOKEN=${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" >> $file_path
-        env:
-          file_path: deploy/config.sh
-      -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       -
