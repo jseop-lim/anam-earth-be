@@ -1,0 +1,12 @@
+version: 0.0
+os: linux
+
+files:
+  - source: /deploy
+    destination: /home/ubuntu/anam-earth/deploy
+
+hooks:
+  AfterInstall:
+    - location: deploy.sh
+      timeout: 300
+      runas: ubuntu
