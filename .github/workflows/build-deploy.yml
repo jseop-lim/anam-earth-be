@@ -1,4 +1,4 @@
-name: 8percent CI
+name: Anam Earth CI/CD
 
 on:
   push:
@@ -17,7 +17,9 @@ jobs:
         uses: actions/checkout@v3
       -
         name: Run script creating secret files
-        run: ./.github/scripts/secrets.sh
+        run: |
+          chmod +x ./.github/scripts/secrets.sh
+          ./.github/scripts/secrets.sh
         shell: bash
       -
         name: Set up Docker Buildx
