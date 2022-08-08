@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Import configurations
-source config.sh
+# Import configurations and Docker Hub login
+#source config.sh
+#docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_ACCESS_TOKEN
 
 # Install backend docker image and erase previous image
-#docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_ACCESS_TOKEN
 docker compose pull
 
 if [ "$(docker ps -aq -f name=anam-earth-backend)" ]; then
