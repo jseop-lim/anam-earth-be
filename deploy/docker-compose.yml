@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  backend:
+    image: qaws1000/anam-earth-backend:latest
+    container_name: anam-earth-backend
+    command: gunicorn --bind 0:8000 config.wsgi:application --reload
+    restart: on-failure
+    ports:
+      - "8000:8000"
+    volumes:
+      - django_static:/app/static
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/sites-enabled:/etc/nginx/conf.d
+      - django_static:/static
+    depends_on:
+      - backend
+
+volumes:
+    django_static:
