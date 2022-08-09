@@ -40,25 +40,14 @@ DATABASES = {
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    "filters": {
-        "require_debug_false": {
-            "()": "django.utils.log.RequireDebugFalse",
-        },
-    },
     'handlers': {
-        "console_prod": {
-            "level": "DEBUG",
-            "filters": ["require_debug_false"],
-            "class": "logging.StreamHandler",
+        'console': {
+            'class': 'logging.StreamHandler',
         },
     },
     'loggers': {
-        "django": {
-            "handlers": ["console_prod"],
-            "level": "DEBUG",
-        },
         'django.request': {
-            'handlers': ['console_prod'],
+            'handlers': ['console'],
             'level': 'DEBUG',  # change debug level as appropiate
             'propagate': False,
         },
