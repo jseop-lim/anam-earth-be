@@ -4,7 +4,7 @@ services:
   backend:
     image: qaws1000/anam-earth-backend:latest
     container_name: anam-earth-backend
-    command: gunicorn --bind 0:8000 config.wsgi:application --reload
+    command: gunicorn --bind 0:8000 config.wsgi:application
     restart: on-failure
     ports:
       - "8000:8000"
@@ -13,6 +13,7 @@ services:
   nginx:
     image: nginx
     container_name: nginx
+    restart: on-failure
     ports:
       - "80:80"
     volumes:
