@@ -10,6 +10,9 @@ services:
       - "8000:8000"
     volumes:
       - django_static:/app/static
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
   nginx:
     image: nginx
     container_name: nginx

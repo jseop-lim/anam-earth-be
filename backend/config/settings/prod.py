@@ -31,7 +31,7 @@ DATABASES = {
         'NAME': env('MYSQL_DATABASE'),
         'USER': env('MYSQL_USER'),
         'PASSWORD': env('MYSQL_PASSWORD'),
-        'HOST': '43.200.76.8',
+        'HOST': 'host.docker.internal',
         'PORT': 3306,
     }
 }
