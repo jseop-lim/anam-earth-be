@@ -27,7 +27,7 @@ SECRET_KEY = env('SECRET_KEY')
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.contrib.gis.db.backends.mysql',
         'NAME': env('MYSQL_DATABASE'),
         'USER': env('MYSQL_USER'),
         'PASSWORD': env('MYSQL_PASSWORD'),

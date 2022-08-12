@@ -1,12 +1,15 @@
 FROM python:3.9
 ENV PYTHONUNBUFFERED=1
+RUN apt-get update &&\
+    apt-get install -y binutils gdal-bin
 
 RUN mkdir /app
 WORKDIR /app
 
-COPY requirements.txt ./
 ENV DJANGO_SETTINGS_MODULE=config.settings.local
-RUN pip install --upgrade pip && pip install -r requirements.txt
+COPY requirements.txt ./
+RUN pip install --upgrade pip &&\
+    pip install -r requirements.txt
 COPY . .
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
