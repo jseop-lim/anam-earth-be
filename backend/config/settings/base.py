@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'board.apps.BoardConfig',
     # rest_framework
     'rest_framework',
-    # swagger
+    'rest_framework_gis',
     'drf_yasg',
 ]
 
