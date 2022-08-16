@@ -4,5 +4,5 @@ from map import views
 
 
 urlpatterns = [
-
+    path('arcs', views.ArcListView.as_view(), name='arc-list')
 ]
