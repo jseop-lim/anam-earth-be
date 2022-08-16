@@ -34,12 +34,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
     # my apps
     'map.apps.MapConfig',
     'board.apps.BoardConfig',
     # rest_framework
     'rest_framework',
-    # swagger
+    'rest_framework_gis',
     'drf_yasg',
 ]
 

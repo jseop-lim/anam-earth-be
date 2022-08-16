@@ -8,3 +8,4 @@ logs/*
 media/*
 **/.env*
 /deploy/config.sh
+/data/
