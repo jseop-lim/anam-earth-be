@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
+    'django_filters',
+    'django_property_filter',
     'corsheaders',
     # my apps
     'map.apps.MapConfig',
