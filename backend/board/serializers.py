@@ -2,7 +2,7 @@ from rest_framework import serializers
 from board.models import Post, Comment
 
 
-class CommentListSerializer(serializers.ModelSerializer):
+class CommentSerializer(serializers.ModelSerializer):
     """
     댓글 목록, 생성
     """
@@ -10,7 +10,7 @@ class CommentListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ['id', 'post', 'content']  # TODO user
+        fields = ['id', 'username', 'post', 'content', 'created_at']  # TODO user
 
 
 class CommentUpdateSerializer(serializers.ModelSerializer):
@@ -31,16 +31,16 @@ class PostListSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Post
-        fields = ['id', 'subject', 'created_at']  # TODO user
+        fields = ['id', 'username', 'subject', 'created_at']  # TODO user
 
 
 class PostDetailSerializer(serializers.ModelSerializer):
     """
     게시글 상세에서 출력되는 정보
     """
-    comments = CommentListSerializer(many=True, read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
 
     class Meta:
         model = Post
-        fields = ['id', 'subject', 'content', 'created_at', 'comments']  # TODO user
+        fields = ['id', 'username', 'subject', 'content', 'created_at', 'comments']  # TODO user
         # read_only_fields = ['user']  # TODO user
