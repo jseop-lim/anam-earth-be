@@ -3,6 +3,7 @@ from django.utils.decorators import method_decorator
 from django_filters import rest_framework as filters
 
 from rest_framework import generics
+from rest_framework.exceptions import ValidationError
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 
@@ -25,3 +26,9 @@ class ArcListView(generics.ListAPIView):
     pagination_class = HateoasGeoJsonPagination
     filter_backends = (filters.DjangoFilterBackend, )
     filterset_class = ArcFilterSet
+
+    def get_queryset(self):
+        level = self.request.query_params.get('level')
+        if level and level not in {'1', '2', '3'}:
+            raise ValidationError({'level': '1, 2, 3 중 한 값이여야 합니다.'})
+        return super().get_queryset()
