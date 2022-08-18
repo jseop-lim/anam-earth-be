@@ -8,8 +8,17 @@ ALLOWED_HOSTS = [
     'anam-earth-api.jseoplim.com',
     '43.200.76.8',
     'ec2-43-200-76-8.ap-northeast-2.compute.amazonaws.com',
-    '127.0.0.1'
+    '127.0.0.1',
+    'localhost',
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://anam-earth.jseoplim.com',
+    'http://127.0.0.1:3000',
+    'http://localhost:3000',
+]
+
+CORS_ALLOW_CREDENTIALS = True
 
 STATIC_ROOT = BASE_DIR / 'static/'
 STATICFILES_DIRS = []
