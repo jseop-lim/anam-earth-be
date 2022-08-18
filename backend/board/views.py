@@ -20,10 +20,10 @@ class PostViewSet(viewsets.ModelViewSet):
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
-    http_method_names = ['post', 'put', 'patch', 'delete', 'head', 'options', 'trace']
+    # http_method_names = ['post', 'put', 'patch', 'delete', 'head', 'options', 'trace']
 
     def get_serializer_class(self):
-        if self.action in {'update', 'retrieve'}:
+        if self.action == 'update':
             return serializers.CommentUpdateSerializer
         else:  # create/retrieve/update/destroy
-            return serializers.CommentListSerializer
+            return serializers.CommentSerializer
