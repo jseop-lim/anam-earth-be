@@ -15,6 +15,15 @@ from map.models import Arc, Node
 from map.functions import DistanceSphere
 
 
+class NodeListSerializer(GeoFeatureModelSerializer):
+
+    class Meta:
+        model = Node
+        fields = []  # 속도를 위해 비움
+        geo_field = 'point'
+        id_field = False
+
+
 class ArcListSerializer(GeoFeatureModelSerializer):
     linestrings = GeometrySerializerMethodField()
 
@@ -61,7 +70,7 @@ class ArcOptimalSerializer(serializers.Serializer):
         node = Node.objects.annotate(
             distance=DistanceSphere('point', point)
         ).filter(
-            distance__lte=D(mi=100).mi
+            distance__lte=D(mi=500).mi
         ).order_by('distance').first()
         return node
 

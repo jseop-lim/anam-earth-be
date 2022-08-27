@@ -4,14 +4,33 @@ from django_filters import rest_framework as filters
 
 from rest_framework import generics
 from rest_framework.exceptions import ValidationError
-from rest_framework_gis.schema import GeoFeatureAutoSchema
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 
 from map import mixins, serializers
 from map.filters import ArcFilterSet
-from map.models import Arc
-from map.pagination import HateoasGeoJsonPagination, HateoasGeoJsonPaginatorInspector
+from map.models import Node, Arc
+from map.pagination import (
+    HateoasGeoJsonPagination,
+    HateoasGeoJsonPaginatorInspector,
+)
+from map.schema import (
+    node_list_schema,
+    arc_optimal_schema,
+)
+
+
+@method_decorator(name='get', decorator=swagger_auto_schema(
+    responses={
+        200: openapi.Response(
+            description='노드 리스트를 GeoJson 형태로 반환',
+            schema=node_list_schema,
+        )
+    }
+))
+class NodeListView(generics.ListAPIView):
+    queryset = Node.objects.all()
+    serializer_class = serializers.NodeListSerializer
 
 
 @method_decorator(name='get', decorator=swagger_auto_schema(
@@ -39,22 +58,13 @@ class ArcOptimalView(mixins.OptimalPathMixin,
                      generics.GenericAPIView):
     serializer_class = serializers.ArcOptimalSerializer
 
-    swagger_responses = {
-        200: openapi.Response(
-            description='노드 좌표(경도, 위도)가 연결된 LineString 형태로 최적 경로 반환',
-            schema=openapi.Schema(
-                title='geometry',
-                type=openapi.TYPE_OBJECT,
-                properties={
-                    "type": {"type": "string", "enum": ["LineString"]},
-                    "coordinates": GeoFeatureAutoSchema.COORDINATES_SCHEMA_FOR_LINE_STRING,
-                },
-            )
-        )
-    }
-
     @swagger_auto_schema(
-        responses=swagger_responses
+        responses={
+            200: openapi.Response(
+                description='노드 좌표(경도, 위도)가 연결된 LineString 형태로 최적 경로 반환',
+                schema=arc_optimal_schema,
+            )
+        }
     )
     def post(self, request, *args, **kwargs):
         return self.optimal(request, *args, **kwargs)
