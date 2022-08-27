@@ -9,9 +9,9 @@ class Node(models.Model):
 
 class Arc(models.Model):
     QUALITY_CHOICES = [('상', '상'), ('중', '중'), ('하', '하')]
-    start_node = models.ForeignKey(verbose_name='시작 노드', to='Node', on_delete=models.CASCADE,
+    start_node = models.ForeignKey(verbose_name='출발 노드', to='Node', on_delete=models.CASCADE,
                                    related_name='start_arcs')
-    end_node = models.ForeignKey(verbose_name='끝 노드', to='Node', on_delete=models.CASCADE,
+    end_node = models.ForeignKey(verbose_name='도착 노드', to='Node', on_delete=models.CASCADE,
                                  related_name='end_arcs')
     vertical_distance = models.FloatField(verbose_name='수직 거리')
     horizontal_distance = models.FloatField(verbose_name='수평 거리')
