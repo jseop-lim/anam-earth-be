@@ -22,6 +22,7 @@ services:
     volumes:
       - ./nginx/sites-enabled:/etc/nginx/conf.d
       - django_static:/static
+      - /home/ubuntu/anam-earth/frontend/build:/build
     depends_on:
       - backend
 
