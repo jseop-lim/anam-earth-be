@@ -63,5 +63,5 @@ jobs:
           aws deploy create-deployment
           --application-name anam-earth-deploy
           --deployment-config-name CodeDeployDefault.AllAtOnce
-          --deployment-group-name anam-earth-deploy-group
+          --deployment-group-name anam-earth-backend-deploy-group
           --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
