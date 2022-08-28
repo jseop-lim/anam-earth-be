@@ -41,7 +41,7 @@ class NodeListView(generics.ListAPIView):
     paginator_inspectors=[HateoasGeoJsonPaginatorInspector],
 ))
 class ArcListView(generics.ListAPIView):
-    queryset = Arc.objects.filter(start_node_id__lt=F('end_node_id'))
+    queryset = Arc.objects.all()
     serializer_class = serializers.ArcListSerializer
     pagination_class = HateoasGeoJsonPagination
     filter_backends = (filters.DjangoFilterBackend, )
