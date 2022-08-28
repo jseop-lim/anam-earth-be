@@ -2,9 +2,11 @@
 
 cd ~/anam-earth/deploy
 
-# Import configurations and Docker Hub login
-source config.sh
-docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_ACCESS_TOKEN
+# Import configurations and Docker Hub login if repository is private
+if [ -f config.sh ]; then
+    source config.sh
+    docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_ACCESS_TOKEN
+fi
 
 # Install backend docker image and erase previous image
 docker compose pull
