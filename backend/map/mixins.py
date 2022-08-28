@@ -19,13 +19,8 @@ class OptimalPathMixin:
         response_serializer.is_valid(raise_exception=True)
         return Response(response_serializer.data, status=status.HTTP_200_OK)
 
-    def get_arc_weight_expression(self):
-        level_to_weight = {3: 1000, 2: 100, 1: 1}
-        return F('horizontal_distance') * Case(
-            When(Q(gradient__gt=0.08) | Q(is_stair=True) | Q(is_step=True), then=level_to_weight[3]),
-            When(Q(gradient__lt=0.55) | Q(quality='하'), then=level_to_weight[1]),
-            default=level_to_weight[2]
-        )
+    def get_weight_coefficient(self, level):
+        return 2.5 ** (level if level > 1 else 0)
 
     def perform_optimal(self, start_node, end_node, ebunch_to_add):
         graph = nx.Graph()
@@ -34,7 +29,7 @@ class OptimalPathMixin:
             graph,
             source=start_node,
             target=end_node,
-            weight='wieght',
+            weight='weight',
             method='dijkstra'
         )
         return optimal_path
@@ -44,7 +39,12 @@ class OptimalPathMixin:
         end_node = serializer.data['end_node']
         arcs_values = Arc.objects.annotate(
             gradient=F('vertical_distance') / F('horizontal_distance'),
-            weight=self.get_arc_weight_expression()
+            weight_coeff=Case(
+                When(Q(gradient__gt=0.08) | Q(is_stair=True) | Q(is_step=True), then=self.get_weight_coefficient(3)),
+                When(Q(gradient__gt=0.055) & Q(quality='하'), then=self.get_weight_coefficient(2)),
+                default=self.get_weight_coefficient(1),
+            ),
+            weight=F('horizontal_distance') * F('weight_coeff')
         ).values_list(
             'start_node', 'end_node', 'weight'
         )

@@ -27,7 +27,7 @@ class Arc(models.Model):
     def level(self) -> int:  # TODO coler string 반환?
         if self.gradient > 0.08 or self.is_stair or self.is_step:
             return 3
-        elif self.gradient < 0.55 and self.quality == '하':
-            return 1
-        else:
+        elif self.gradient > 0.055 and self.quality == '하':
             return 2
+        else:
+            return 1
