@@ -1,4 +1,3 @@
-from django.db.models import F
 from django.utils.decorators import method_decorator
 from django_filters import rest_framework as filters
 
@@ -54,9 +53,9 @@ class ArcListView(generics.ListAPIView):
         return super().get_queryset()
 
 
-class ArcOptimalView(mixins.OptimalPathMixin,
-                     generics.GenericAPIView):
-    serializer_class = serializers.ArcOptimalSerializer
+class ArcOptimalPathView(mixins.OptimalPathMixin,
+                         generics.GenericAPIView):
+    serializer_class = serializers.ArcPathSerializer
 
     @swagger_auto_schema(
         responses={
@@ -67,4 +66,20 @@ class ArcOptimalView(mixins.OptimalPathMixin,
         }
     )
     def post(self, request, *args, **kwargs):
-        return self.optimal(request, *args, **kwargs)
+        return self.path(request, *args, **kwargs)
+
+
+class ArcShortestPathView(mixins.ShortestPathMixin,
+                          generics.GenericAPIView):
+    serializer_class = serializers.ArcPathSerializer
+
+    @swagger_auto_schema(
+        responses={
+            200: openapi.Response(
+                description='노드 좌표(경도, 위도)가 연결된 LineString 형태로 최단 경로 반환',
+                schema=arc_optimal_schema,
+            )
+        }
+    )
+    def post(self, request, *args, **kwargs):
+        return self.path(request, *args, **kwargs)

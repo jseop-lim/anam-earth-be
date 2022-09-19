@@ -58,7 +58,7 @@ class CoordinateListField(serializers.ListField):
         raise ValidationError(errors)
 
 
-class ArcOptimalSerializer(serializers.Serializer):
+class ArcPathSerializer(serializers.Serializer):
     start_coordinate = CoordinateListField(write_only=True)
     end_coordinate = CoordinateListField(write_only=True)
     start_node = serializers.SerializerMethodField()
@@ -87,7 +87,7 @@ class ArcOptimalSerializer(serializers.Serializer):
         return end_node.id
 
 
-class OptimalPathSerializer(serializers.Serializer):
+class GeometrySerializer(serializers.Serializer):
     geometry = GeometryField()
 
     class Meta:
