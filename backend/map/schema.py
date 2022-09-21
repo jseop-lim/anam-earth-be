@@ -24,7 +24,7 @@ node_list_schema = openapi.Schema(
     }
 )
 
-arc_optimal_schema = openapi.Schema(
+arc_path_schema = openapi.Schema(
     title='geometry',
     type=openapi.TYPE_OBJECT,
     properties=GeoFeatureAutoSchema.GEO_FIELD_TO_SCHEMA[LineStringField]
