@@ -89,6 +89,7 @@ class ArcPathSerializer(serializers.Serializer):
 
 class GeometrySerializer(serializers.Serializer):
     geometry = GeometryField()
+    properties = serializers.DictField(child=serializers.FloatField())
 
     class Meta:
         geo_field = 'geometry'

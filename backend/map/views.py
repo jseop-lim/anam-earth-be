@@ -15,7 +15,7 @@ from map.pagination import (
 )
 from map.schema import (
     node_list_schema,
-    arc_optimal_schema,
+    arc_path_schema,
 )
 
 
@@ -61,7 +61,7 @@ class ArcOptimalPathView(mixins.OptimalPathMixin,
         responses={
             200: openapi.Response(
                 description='노드 좌표(경도, 위도)가 연결된 LineString 형태로 최적 경로 반환',
-                schema=arc_optimal_schema,
+                schema=arc_path_schema,
             )
         }
     )
@@ -77,7 +77,7 @@ class ArcShortestPathView(mixins.ShortestPathMixin,
         responses={
             200: openapi.Response(
                 description='노드 좌표(경도, 위도)가 연결된 LineString 형태로 최단 경로 반환',
-                schema=arc_optimal_schema,
+                schema=arc_path_schema,
             )
         }
     )
